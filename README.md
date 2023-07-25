@@ -2,19 +2,19 @@
 
   # ☁️ Cloudy
 
-  <sub>A lightweight discord api wrapper built on top of [nextcore](https://github.com/nextsnake/nextcore).</sub>
+  <sub>A lightweight discord API wrapper built on top of [nextcore](https://github.com/nextsnake/nextcore).</sub>
 
 </div>
 
-> *Cloudy is a discord api wrapper I decided to make because I wanted to escape the harsh reality of working on my discord bot framework [Goldy Bot V5](https://github.com/Goldy-Bot/Goldy-Bot-V5).*
+> *Cloudy is a discord API wrapper I decided to make because I wanted to escape the harsh reality of working on my discord bot framework [Goldy Bot V5](https://github.com/Goldy-Bot/Goldy-Bot-V5).*
 
 > ### ⚠️ Work in progress...
 
 ## *WHAT DA HELL! WHAT IS WRONG WITH YOU PYTHON DEVELOPERS? ANOTHER FUCKING DISCORD API WRAPPER!!!*
-Yes, another fucking python discord api wrapper; but *let me 🍲cook this time...*
+Yes, another fucking python discord API wrapper; but *let me 🍲cook this time...*
 
-- **Quick to script.** Cloudy is built for quick write ups, before you know it you essentially have a functioning bot.
-- **The Design is Very Human!** Even a script kiddy would know what their doing.
+- **Quick to script.** Cloudy is built for quick write-ups, before you know it you essentially have a functioning bot.
+- **The Design is Very Human!** Even a script kiddy would know what they're doing.
 - **Lightweight,** I try to keep the codebase as lite and least complex as possible, mostly for maintainability reasons.
 - **Fast as fu#k!** Yeah *totally* all because of my hard work. [~~nextcore~~](https://github.com/nextsnake/nextcore)
 - **Touch the low-end even harder!!! 😳** *wait what...* alright this is getting out of hand now...
@@ -43,7 +43,7 @@ bot.run()
 > #### Hate it? ~~Skill issue.~~
 
 ### Where do I pass my bot token?
-Cloudy by default uses the ``BOT_TOKEN`` environment variable so we recommend using ``.env`` files to store your bot token and other sensitive.
+Cloudy by default uses the ``BOT_TOKEN`` environment variable so we recommend using ``.env`` files to store your bot token and other sensitive information.
 
 Just create a file named ``.env`` and enter your bot token like so:
 ```env
