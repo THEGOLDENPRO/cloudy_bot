@@ -10,8 +10,8 @@
 
 > ### ⚠️ Work in progress...
 
-## *WHAT DA HELL! WHAT IS WRONG WITH YOU PYTHON DEVELOPERS? ANOTHER FUCKING DISCORD API WRAPPER!!!*
-Yes, another fucking python discord API wrapper; but *let me 🍲cook this time...*
+## *WHAT DA HELL! WHAT IS WRONG WITH YOU PYTHON DEVELOPERS? ANOTHER FU#KING DISCORD API WRAPPER!!!*
+Yes, another fu#king python discord API wrapper; but *let me 🍲cook this time...*
 
 - **Quick to script.** Cloudy is built for quick write-ups, before you know it you essentially have a functioning bot.
 - **The Design is Very Human!** Even a script kiddy would know what they're doing.
