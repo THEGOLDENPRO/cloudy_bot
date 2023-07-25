@@ -2,16 +2,16 @@
 
   # ☁️ Cloudy
 
-  <sub>A lightweight discord API wrapper built on top of [nextcore](https://github.com/nextsnake/nextcore).</sub>
+  <sub>A lightweight Discord API wrapper built on top of [nextcore](https://github.com/nextsnake/nextcore).</sub>
 
 </div>
 
-> *Cloudy is a discord API wrapper I decided to make because I wanted to escape the harsh reality of working on my discord bot framework [Goldy Bot V5](https://github.com/Goldy-Bot/Goldy-Bot-V5).*
+> *Cloudy is a Discord API wrapper I decided to make because I wanted to escape the harsh reality of working on my Discord bot framework [Goldy Bot V5](https://github.com/Goldy-Bot/Goldy-Bot-V5).*
 
 > ### ⚠️ Work in progress...
 
 ## *WHAT DA HELL! WHAT IS WRONG WITH YOU PYTHON DEVELOPERS? ANOTHER FU#KING DISCORD API WRAPPER!!!*
-Yes, another fu#king python discord API wrapper; but *let me 🍲cook this time...*
+Yes, another fu#king python Discord API wrapper; but *let me 🍲cook this time...*
 
 - **Quick to script.** Cloudy is built for quick write-ups, before you know it you essentially have a functioning bot.
 - **The Design is Very Human!** Even a script kiddy would know what they're doing.
