@@ -4,4 +4,6 @@
 Copyright (c) 2023-present Goldy
 """
 
+__all__ = ("__version__",)
+
 __version__ = "1.0"
