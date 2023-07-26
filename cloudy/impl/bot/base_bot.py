@@ -6,6 +6,7 @@ if TYPE_CHECKING:
 
 import os
 import asyncio
+from datetime import datetime
 from decouple import AutoConfig
 from devgoldyutils import LoggerAdapter, Colours
 
@@ -54,6 +55,8 @@ class BaseBot():
         self.application: ApplicationData = None
         """The bot's application data."""
 
+        self._start_up_time: datetime = None
+
         # Setting log level.
         cloudy_logger.setLevel(log_level)
 
@@ -61,9 +64,16 @@ class BaseBot():
         self.logger = LoggerAdapter(cloudy_logger, prefix = "Bot")
 
     def run(self) -> NoReturn:
-        """⚡ Starts cloudy bot."""
+        """⚡ Starts cloudy."""
         self.async_loop.run_until_complete(
             self.__run_async()
+        )
+
+    async def stop(self) -> NoReturn:
+        """🛑 Stops cloudy."""
+        # Raises critical error within nextcore and stops it.
+        await self.shard_manager.dispatcher.dispatch( 
+            "critical"
         )
 
 
@@ -124,6 +134,8 @@ class BaseBot():
 
         await self.__pre_setup()
         await self.__setup()
+
+        self._start_up_time = datetime.now() # Setting the start up time.
 
         # Raise a error and exit whenever a critical error occurs.
         error = await self.shard_manager.dispatcher.wait_for(lambda: True, "critical")

@@ -24,6 +24,7 @@ dependencies = [
     "requests",
     "importlib-metadata; python_version<'3.8'",
 
+    "regex",
     "devgoldyutils>=2.5",
     "nextcore[speed]>=2.0.1",
     "python-decouple>=3.7",
