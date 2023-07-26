@@ -85,12 +85,9 @@ class Command(dict):
 
     def __get_function_parameters(self) -> List[str]:
         """Returns the function parameters of a command respectively."""
-        
+
         # Get list of function params.
         func_params = list(self.func.__code__.co_varnames)
-        
-        # Removes 'self' argument.
-        func_params.pop(0)
 
         # Removes 'platter' argument.
         func_params.pop(0)

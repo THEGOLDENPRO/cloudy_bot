@@ -32,7 +32,7 @@ class Bot(BaseBot):
         self.commands: List[Command] = []
         """A list of registered commands."""
 
-        self.__unregistered_commands = List[Command]
+        self.__unregistered_commands: List[Command] = []
 
     @property
     def latency(self) -> float | None:
