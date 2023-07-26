@@ -22,8 +22,7 @@ Yes, another fu#king python Discord API wrapper; but *let me 🍲cook this time.
 *ANYWAYS, here's some code:*
 
 ```python
-from cloudy.impl import Bot
-from cloudy.typing import Droplet
+from cloudy.impl import Bot, Droplet
 
 bot = Bot()
 
