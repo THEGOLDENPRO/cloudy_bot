@@ -8,7 +8,7 @@ readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
 keywords = [
-    "cloudy", "cloudy bot", "cloudy wrapper", "cloudy api wrapper", "cloudy discord api", "cloudy discord wrapper"
+    "cloudy", "cloudy bot", "cloudy wrapper", "cloudy api wrapper", "cloudy discord api", "cloudy discord wrapper", "nextcore"
 ]
 classifiers = [
 	'Operating System :: Microsoft :: Windows :: Windows 11',
@@ -23,6 +23,7 @@ classifiers = [
 dependencies = [
     "requests",
     "importlib-metadata; python_version<'3.8'",
+
     "devgoldyutils>=2.5",
     "nextcore[speed]>=2.0.1",
     "python-decouple>=3.7",
