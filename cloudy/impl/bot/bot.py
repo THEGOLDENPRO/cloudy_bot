@@ -7,6 +7,7 @@ if TYPE_CHECKING:
 
 import logging
 from datetime import datetime
+from devgoldyutils import Colours
 
 from .base_bot import BaseBot
 from ..command import Command
@@ -93,7 +94,7 @@ class Bot(BaseBot):
                     command
                 )
 
-                self.logger.debug(f"Added command '{command.name}'.")
+                self.logger.debug(f"Added command '{Colours.PINK_GREY.apply(command.name)}'.")
 
                 return command
 
