@@ -1,3 +1,7 @@
+"""
+Contains the Cloudy logger object. You may use this to change logging levels.
+"""
+
 import logging
 from devgoldyutils import add_custom_handler, Colours
 

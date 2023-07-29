@@ -1,3 +1,7 @@
+"""
+Contains the Cloudy exceptions that may be raised during runtime.
+"""
+
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
