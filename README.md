@@ -2,7 +2,7 @@
 
   # ☁️ Cloudy
 
-  <sub>A lightweight Discord API wrapper built on top of [nextcore](https://github.com/nextsnake/nextcore).</sub>
+  <sub>A simple & basic Discord API wrapper built on top of [nextcore](https://github.com/nextsnake/nextcore).</sub>
 
 </div>
 
