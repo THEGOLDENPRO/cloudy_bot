@@ -1,6 +1,6 @@
 [project]
 name = "cloudy-bot"
-description = "A lightweight discord api wrapper built on top of nextcore."
+description = "A simple & basic discord api wrapper built on top of nextcore."
 authors = [
     {name = "Goldy", email = "goldy@devgoldy.xyz"},
 ]

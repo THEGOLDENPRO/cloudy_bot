@@ -8,6 +8,7 @@ import os
 import asyncio
 from datetime import datetime
 from decouple import AutoConfig
+from abc import ABC, abstractmethod
 from devgoldyutils import LoggerAdapter, Colours
 
 from nextcore.gateway import ShardManager
@@ -16,12 +17,10 @@ from nextcore.http import HTTPClient, BotAuthentication, UnauthorizedError, Rout
 from ... import errors
 from ...logger import cloudy_logger
 
-config = AutoConfig(search_path = os.getcwd())
-
 __all__ = ("BaseBot",)
 
-class BaseBot():
-    """Base class for Bot."""
+class BasicBot(ABC):
+    """A basic bot."""
     def __init__(
         self, 
         token: str | None,
@@ -29,8 +28,10 @@ class BaseBot():
         presence: UpdatePresenceData,
         log_level: Literal[50, 40, 30, 20, 10, 0]
     ) -> None:
+        self.config = AutoConfig(search_path = os.getcwd())
+
         if token is None:
-            token = config("BOT_TOKEN", default = None)
+            token = self.config("BOT_TOKEN", default = None)
 
             if token is None:
                 raise errors.CloudyError("Please enter a discord bot token!")
@@ -50,11 +51,6 @@ class BaseBot():
         )
         """Nextcore shard manager, use if you would like to take control of shards."""
 
-        self.bot_user: UserData = None
-        """The bot's user data."""
-        self.application: ApplicationData = None
-        """The bot's application data."""
-
         self._start_up_time: datetime = None
 
         # Setting log level.
@@ -62,6 +58,8 @@ class BaseBot():
 
         self.async_loop = asyncio.get_event_loop()
         self.logger = LoggerAdapter(cloudy_logger, prefix = "Bot")
+
+        super().__init__()
 
     def run(self) -> NoReturn:
         """⚡ Starts cloudy."""
@@ -77,41 +75,15 @@ class BaseBot():
         )
 
 
-    async def __setup(self) -> None:
-        # TODO: Register interaction commands.
-        # TODO: Start listening for interaction commands.
+    @abstractmethod
+    async def _setup(self) -> None:
+        """Runs right after nextcore is done with setup."""
         ...
 
-    async def __pre_setup(self) -> None:
-        """Method ran before actual setup. This is used to fetch some data from discord needed by cloudy before running the actual setup."""
-
-        # Get bot's application data.
-        # ----------------------------
-        r = await self.http_client.request(
-            Route(
-                "GET", 
-                "/oauth2/applications/@me"
-            ),
-            rate_limit_key = self.authentication.rate_limit_key,
-            headers = self.authentication.headers
-        )
-
-        self.application = await r.json()
-        self.logger.debug("Application data requested!")
-
-        # Get bot's user data.
-        # ---------------------
-        r = await self.http_client.request(
-            Route(
-                "GET", 
-                "/users/@me"
-            ),
-            rate_limit_key = self.authentication.rate_limit_key,
-            headers = self.authentication.headers
-        )
-
-        self.bot_user = await r.json()
-        self.logger.debug("Bot's user object requested!")
+    @abstractmethod
+    async def _pre_setup(self) -> None:
+        """Runs before the actual setup method is ran."""
+        ...
 
 
     async def __run_async(self):
@@ -132,8 +104,8 @@ class BaseBot():
             event_name = "READY"
         )
 
-        await self.__pre_setup()
-        await self.__setup()
+        await self._pre_setup()
+        await self._setup()
 
         self._start_up_time = datetime.now() # Setting the start up time.
 
