@@ -24,7 +24,7 @@ class CloudyError(Exception):
 class InvalidParameter(CloudyError):
     """
     Raises whenever there is an invalid parameter in a command.
-    Normally occurs when you have uppercase characters in a command argument.
+    Normally occurs when you have uppercase characters in a command arguments.
     """
     def __init__(self, command: Command, invalid_param: str):
         super().__init__(

@@ -2,3 +2,4 @@ env
 venv
 __pycache__
 cloudy_bot.egg-info
+.ruff_cache

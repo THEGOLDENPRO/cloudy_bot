@@ -93,6 +93,8 @@ class Bot(BaseBot):
                     command
                 )
 
+                self.logger.debug(f"Added command '{command.name}'.")
+
                 return command
 
             return inner(func)
