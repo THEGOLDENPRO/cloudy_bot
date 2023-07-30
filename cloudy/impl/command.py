@@ -2,13 +2,14 @@ from __future__ import annotations
 from typing import Callable, Any, TYPE_CHECKING, Dict, List
 
 if TYPE_CHECKING:
-    from discord_typings import ApplicationCommandOptionData, ApplicationCommandPayload
+    from discord_typings import ApplicationCommandOptionData, ApplicationCommandPayload, InteractionData
 
     from .bot import Bot
     from .droplet import Droplet
 
 import regex
-from .. import errors
+from devgoldyutils import LoggerAdapter, Colours
+from .. import errors, logger
 
 __all__ = ("Command",)
 
@@ -42,6 +43,11 @@ class Command(dict):
             self.__slash_options = slash_options
 
         self.__params = self.__get_function_parameters()
+
+        self.logger = LoggerAdapter(
+            LoggerAdapter(logger.cloudy_logger, prefix = Colours.PINK_GREY.apply(name)), 
+            prefix = "Command"
+        )
 
 
         data = {
@@ -79,8 +85,17 @@ class Command(dict):
 
 
     async def invoke(self, droplet: Droplet) -> None:
-        self.bot.logger.debug(f"Attempting to invoke command '{self.name}'...")
-        ...
+        self.logger.debug(f"Attempting to invoke command '{self.name}'...")
+
+        data = droplet.data
+
+        params = self.__invoke_data_to_params(data)
+        if not params == {}: self.logger.debug(f"Got args --> {params}")
+
+        try:
+            await self.func(droplet, **params)
+        except Exception as e:
+            raise errors.CloudyError(e, self.logger)
 
 
     def __get_function_parameters(self) -> List[str]:
@@ -127,3 +142,25 @@ class Command(dict):
                 })
 
         return options
+
+    def __invoke_data_to_params(self, data: InteractionData) -> Dict[str, str]:
+        """A method that grabs slash command arguments from invoke data and converts it to appropriate params."""
+        self.logger.debug("Phrasing invoke data into parameters...")
+
+        params = {}
+        for option in data["data"].get("options", []):
+            param_key_name = option["name"]
+
+            if option["type"] == 1 or option["type"] == 2: # Ignore sub commands and sub groups.
+                continue
+
+            # Make sure to set dictionary key to the true parameter name.
+            for slash_option in self.slash_options:
+                if self.slash_options[slash_option]["name"] == option["name"]:
+                    param_key_name = slash_option
+                    break
+
+            params[param_key_name] = option["value"]
+            self.logger.debug(f"Found arg '{params[param_key_name]}'.")
+
+        return params

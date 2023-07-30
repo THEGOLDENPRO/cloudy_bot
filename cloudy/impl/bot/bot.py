@@ -5,7 +5,7 @@ if TYPE_CHECKING:
     from typing import Literal
     from discord_typings import (
         UpdatePresenceData, ApplicationCommandPayload, ApplicationCommandOptionData,
-        UserData, ApplicationData, ApplicationCommandData
+        UserData, ApplicationData, ApplicationCommandData, InteractionData
     )
 
 import logging
@@ -13,6 +13,7 @@ from datetime import datetime
 from devgoldyutils import Colours
 from nextcore.http import Route
 
+from ..droplet import Droplet
 from .basic_bot import BasicBot
 from ..command import Command
 
@@ -116,10 +117,15 @@ class Bot(BasicBot):
 
     async def _setup(self) -> None:
         await self.__batch_create_interactions(
-            testing_guild = self.config("TESTING_SERVER", default = None)
+            testing_guild = self.config("TESTING_GUILD", default = None)
         )
+        self.logger.debug("Done registering interactions!")
 
-        # TODO: Start listening for interaction commands.
+        self.shard_manager.event_dispatcher.add_listener(
+            self.__on_interaction,
+            event_name="INTERACTION_CREATE"
+        )
+        self.logger.info("Interaction listener set!")
 
     async def _pre_setup(self) -> None:
         """
@@ -220,5 +226,24 @@ class Bot(BasicBot):
                         f"Registered '{Colours.PINK_GREY.apply(command_name)}' command with interaction id '{Colours.GREY.apply(interaction['id'])}'."
                     )
                     break
+
+        return None
+
+
+    async def __on_interaction(self, interaction: InteractionData) -> None:
+
+        # Slash commands.
+        # ----------------
+        if interaction["type"] == 2:
+            command: Command | None = self.registered_commands.get(f"{interaction['data']['id']}")
+
+            if command is not None:
+                droplet = Droplet(
+                    data = interaction
+                )
+
+                await command.invoke(
+                    droplet
+                )
 
         return None

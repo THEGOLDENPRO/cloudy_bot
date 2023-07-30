@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import NoReturn, Literal, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from discord_typings import UpdatePresenceData, ApplicationData, UserData
+    from discord_typings import UpdatePresenceData
 
 import os
 import asyncio
@@ -12,12 +12,12 @@ from abc import ABC, abstractmethod
 from devgoldyutils import LoggerAdapter, Colours
 
 from nextcore.gateway import ShardManager
-from nextcore.http import HTTPClient, BotAuthentication, UnauthorizedError, Route
+from nextcore.http import HTTPClient, BotAuthentication, UnauthorizedError
 
 from ... import errors
 from ...logger import cloudy_logger
 
-__all__ = ("BaseBot",)
+__all__ = ("BasicBot",)
 
 class BasicBot(ABC):
     """A basic bot."""
